@@ -1,7 +1,6 @@
 import { Point, Button, mouse } from "@nut-tree/nut-js";
 
-export const drawAction = async function (command: string, arg:number[]):Promise<string> {
-    console.log(arg);
+export const drawAction = async function (command: string, arg:number[]):Promise<string> {    
 switch (command) {
     case 'circle' : await drawCircle(arg[0]);
                     return `draw_circle_${arg[0]}`;                    
@@ -14,8 +13,6 @@ switch (command) {
 }
 
 const drawRectangle = async function(width: number, height = width) {
-    console.log(width);
-    console.log(height);
     const position:Point = await mouse.getPosition();
     await someDelay();
     const rectanglePoints:Point[] = [];
@@ -44,7 +41,6 @@ const setCirclePoint = function(position:Point, radius:number, index:number, sig
 }
 
 const drawFigure = async function(figurePoints:Point[], changePosition=false) {
-    console.log(figurePoints.length);
     if (figurePoints.length > 1) {
       if (changePosition) {
         const firstPoint = figurePoints[0];

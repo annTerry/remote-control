@@ -21,7 +21,7 @@ wss.on('connection', function connection(ws) {
       (async () => {
         const pngBuffer = await getScreen();
     if (pngBuffer != null) {
-      console.log(`prnt_scrn ${pngBuffer}`);
+      console.log(`prnt_scrn bufferData`);
       ws.send (`prnt_scrn ${pngBuffer}`);
     }
     else {
