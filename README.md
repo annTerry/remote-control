@@ -1,31 +1,23 @@
 # RSSchool NodeJS websocket task template
-> Static http server and base task packages. 
-> By default WebSocket client tries to connect to the 8080 port.
+App with front and backend. No need to install and start frontend remote control server separately.
 
 ## Installation
 1. Clone/download repo
-2. `npm install`
+2. `checkout dev`
+3. `npm install`
 
 ## Usage
 **Development**
-
 `npm run start:dev`
-
-* App served @ `http://localhost:8181` with nodemon
+* app served @ `http://localhost:8181` with nodemon
+* ws opens on `ws://localhost:8080`
 
 **Production**
-
 `npm run start`
-
 * App served @ `http://localhost:8181` without nodemon
+* ws opens on `ws://localhost:8080`
 
----
-
-**All commands**
-
-Command | Description
---- | ---
-`npm run start:dev` | App served @ `http://localhost:8181` with nodemon
-`npm run start` | App served @ `http://localhost:8181` without nodemon
-
-**Note**: replace `npm` with `yarn` in `package.json` if you use yarn.
+**Notes**
+* Tested on Ubuntu 20 and Windows 11
+* Maybe exists some problems with screenshot in Ubuntu; in Win all works well
+* Circle draws slow, sorry about it
