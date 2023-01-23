@@ -27,8 +27,8 @@ export const webSocketServer = function () {
           (async () => {
             const pngBuffer = await getScreen();
             if (pngBuffer != null) {
-              console.log(`prnt_scrn bufferData`);
-              duplex?.write(`send: prnt_scrn ${pngBuffer}`);
+              console.log(`send: prnt_scrn data`);
+              duplex?.write(`prnt_scrn ${pngBuffer}`);
 
             }
             else {

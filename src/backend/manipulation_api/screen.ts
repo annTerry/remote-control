@@ -10,10 +10,11 @@ export const getScreen = async function () {
   x = x > 0 ? x : 1;
   y = y > 0 ? y : 1;
   x = maxX > maxWidth ? maxWidth - 201 : x;
-  y = maxY > maxHeight ? maxHeight - 201 : x;
+  y = maxY > maxHeight ? maxHeight - 201 : y;
   try {
     const screenRegion = new Region(x, y, 200, 200);
-    const screenShot = await screen.grabRegion(screenRegion);
+    let screenShot = await screen.grabRegion(screenRegion);
+    screenShot = await screenShot.toRGB();
     const pngScreen = new Jimp(screenShot);
     if (pngScreen) {
       const buffer = await pngScreen.getBufferAsync(Jimp.MIME_PNG);
