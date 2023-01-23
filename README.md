@@ -1,5 +1,5 @@
 # RSSchool NodeJS websocket task template
-App with frond and backend. No need to install and start frontend remote control server separately.
+App with front and backend. No need to install and start frontend remote control server separately.
 
 ## Installation
 1. Clone/download repo
