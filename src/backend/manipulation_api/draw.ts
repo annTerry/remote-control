@@ -1,61 +1,61 @@
 import { Point, Button, mouse } from "@nut-tree/nut-js";
 
-export const drawAction = async function (command: string, arg:number[]):Promise<string> {    
-switch (command) {
-    case 'circle' : await drawCircle(arg[0]);
-                    return `draw_circle_${arg[0]}`;                    
-    case 'rectangle' : await drawRectangle(arg[0], arg[1]);
-                    return `draw_rectangle_${arg[0]}_${arg[1]}`;                                           
-    case 'square' : await drawRectangle(arg[0]);
-                    return `draw_square_${arg[0]}`;                    
-    default: return'wrong_data';
-   }
+export const drawAction = async function (command: string, arg: number[]): Promise<string> {
+  switch (command) {
+    case 'circle': await drawCircle(arg[0]);
+      return `draw_circle_${arg[0]}`;
+    case 'rectangle': await drawRectangle(arg[0], arg[1]);
+      return `draw_rectangle_${arg[0]}_${arg[1]}`;
+    case 'square': await drawRectangle(arg[0]);
+      return `draw_square_${arg[0]}`;
+    default: return 'wrong_data';
+  }
 }
 
-const drawRectangle = async function(width: number, height = width) {
-    const position:Point = await mouse.getPosition();
-    await someDelay();
-    const rectanglePoints:Point[] = [];
-    rectanglePoints.push(new Point(position.x, position.y));
-    rectanglePoints.push(new Point(position.x + width, position.y));
-    rectanglePoints.push(new Point(position.x + width, position.y + height));
-    rectanglePoints.push(new Point(position.x, position.y + height));
-    rectanglePoints.push(new Point(position.x, position.y));
-    await someDelay().then(()=>{drawFigure(rectanglePoints, 50)});
+const drawRectangle = async function (width: number, height = width) {
+  const position: Point = await mouse.getPosition();
+  await someDelay();
+  const rectanglePoints: Point[] = [];
+  rectanglePoints.push(new Point(position.x, position.y));
+  rectanglePoints.push(new Point(position.x + width, position.y));
+  rectanglePoints.push(new Point(position.x + width, position.y + height));
+  rectanglePoints.push(new Point(position.x, position.y + height));
+  rectanglePoints.push(new Point(position.x, position.y));
+  await someDelay().then(() => { drawFigure(rectanglePoints, 50) });
 }
 
-const drawCircle = async function(radius: number) {
-    const circlePoints:Point[] = [];
-    const position:Point = await mouse.getPosition();                
-    const maxPoints = radius * 2;
-    for (let i=0; i <= maxPoints; i++) circlePoints.push(setCirclePoint(position, radius, i));
-    for (let i=maxPoints; i>=0; i--) circlePoints.push(setCirclePoint(position, radius, i , 1)); 
-    await someDelay().then(()=>{drawFigure(circlePoints, 15, true)});
+const drawCircle = async function (radius: number) {
+  const circlePoints: Point[] = [];
+  const position: Point = await mouse.getPosition();
+  const maxPoints = radius * 2;
+  for (let i = 0; i <= maxPoints; i++) circlePoints.push(setCirclePoint(position, radius, i));
+  for (let i = maxPoints; i >= 0; i--) circlePoints.push(setCirclePoint(position, radius, i, 1));
+  await someDelay().then(() => { drawFigure(circlePoints, 15, true) });
 }
 
-const setCirclePoint = function(position:Point, radius:number, index:number, sign = -1):Point {
-    const x = - radius + index;
-    const y = Math.ceil(Math.sqrt(radius ** 2 - x **2));
-    const point = new Point(position.x + x, position.y + sign * y);    
-    return point;
+const setCirclePoint = function (position: Point, radius: number, index: number, sign = -1): Point {
+  const x = - radius + index;
+  const y = Math.ceil(Math.sqrt(radius ** 2 - x ** 2));
+  const point = new Point(position.x + x, position.y + sign * y);
+  return point;
 }
 
-const drawFigure = async function(figurePoints:Point[], time = 5, changePosition=false) {
-    if (figurePoints.length > 1) {
-      if (changePosition) {
-        const firstPoint = figurePoints[0];
-        await someDelay().then(()=>{mouse.setPosition(firstPoint)});
-      }
-      await mouse.pressButton(Button.LEFT); 
-      for(const onePoint of figurePoints) {  
-      await someDelay(time).then(()=>{mouse.setPosition(onePoint)});
-      }
-      await mouse.releaseButton(Button.LEFT);      
-   }
+const drawFigure = async function (figurePoints: Point[], time = 5, changePosition = false) {
+  if (figurePoints.length > 1) {
+    if (changePosition) {
+      const firstPoint = figurePoints[0];
+      await someDelay().then(() => { mouse.setPosition(firstPoint) });
+    }
+    await mouse.pressButton(Button.LEFT);
+    for (const onePoint of figurePoints) {
+      await someDelay(time).then(() => { mouse.setPosition(onePoint) });
+    }
+    await mouse.releaseButton(Button.LEFT);
+  }
 }
 
-const someDelay =async function(time = 5):Promise<void> {
-    return new Promise((resolve) => {
-        setTimeout(resolve, time);
-      });
+const someDelay = async function (time = 5): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
 }
